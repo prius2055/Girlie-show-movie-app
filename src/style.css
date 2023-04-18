@@ -11,27 +11,41 @@
   border: 2px #ccc solid;
 }
 
-.header {
+#homepage {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  column-gap: 2%;
+}
+
+.show {
+  display: flex;
+  flex-direction: column;
+  width: 32%;
+  margin-bottom: 20px;
+  border: 1px #ccc solid;
+  background-color: pink;
+}
+
+.show img {
+  width: 100%;
+}
+
+.show-name {
   display: flex;
   justify-content: space-between;
+  margin-top: 15px;
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  margin-right: 10px;
+.show-likes img {
+  width: 15px;
 }
 
-.navbar li {
-  list-style: none;
-  margin-left: 10px;
-}
-
-.navbar a {
-  text-decoration: none;
-  color: black;
-}
-
-footer {
-  border-top: 2px solid black;
+button {
+  width: 75%;
+  margin: 15px auto 0 auto;
+  text-align: center;
+  padding: 4px 8px;
 }
