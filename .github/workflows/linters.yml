@@ -10,8 +10,8 @@ jobs:
     name: Lighthouse
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: '12.x'
       - name: Setup Lighthouse
@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '12.x'
+          node-version: '18.x'
       - name: Setup Webhint
         run: |
           npm install --save-dev hint@7.x
