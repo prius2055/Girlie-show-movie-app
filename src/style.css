@@ -11,6 +11,31 @@
   border: 2px #ccc solid;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 10px;
+}
+
+.navbar li {
+  list-style: none;
+  margin-left: 10px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: black;
+}
+
+footer {
+  border-top: 2px solid black;
+}
+
 #homepage {
   display: flex;
   flex-direction: row;
