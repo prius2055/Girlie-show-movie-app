@@ -16,6 +16,10 @@
   justify-content: space-between;
 }
 
+.hidden {
+  display: none;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -73,4 +77,36 @@ button {
   margin: 15px auto 0 auto;
   text-align: center;
   padding: 4px 8px;
+}
+
+.modal {
+  display: none;
+}
+
+.modal.active {
+  display: block;
+  z-index: 4;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 103vh;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+.modal-content {
+  height: 80vh;
+  position: relative;
+  background-color: white;
+  margin: 60px 90px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  flex-direction: column;
+  border-radius: 15px;
+  overflow-y: scroll;
 }

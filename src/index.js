@@ -26,6 +26,23 @@ const fetchSingleShow = async (para) => {
   );
   const results = await response.json();
   console.log(results);
+  let modal = document.querySelector('.content');
+  const showModal = document.querySelector('.modal')
+  showModal.classList.add("active")
+
+  modal.innerHTML = `
+            <div class="modal-contents">
+            <img class="original" src="${results.image.medium}" alt="">
+            <div class="text">
+              <h1 class="text-title">${results.name}</h1>
+              <p class="language">${results.summary}</p>
+            </div>
+          </div>
+          <div class="comments-section">
+            <p>Comments<span class="commment-counter"></span></p>
+            <span class="close">&times;</span>
+          </div>
+          `
 };
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -67,15 +84,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //ADD EVENTS TO COMMENTS BUTTON
     const commentButtons = document.querySelectorAll('.comment-button');
+    // const showModal = document.querySelectorAll('.modal')
 
     commentButtons.forEach((commentButton, i) =>
       commentButton.addEventListener('click', (e) => {
         e.preventDefault();
         const imdb = shows[i].show.externals.imdb;
         console.log(imdb);
-        fetchSingleShow(imdb);
+        const show = fetchSingleShow(imdb);
+        // showModal.classList.add("active")
       })
     );
+
 
     //ADD EVENTS TO LIKE BUTTON
     const likeButtons = document.querySelectorAll('.like-button');
@@ -87,6 +107,39 @@ window.addEventListener('DOMContentLoaded', () => {
       })
     );
   };
+
+  // ADD MODAL PAGE
+
+  let modal = document.querySelector('.content');
+
+const getSeries =  async () => {
+  const res  = await fetch('https://api.tvmaze.com/shows/1/episodes')
+  const result = await  res.json()
+  return result;
+}
+
+const fetchData =  (id1) => {
+   const data = getSeries().then((output) => {
+      output.forEach( (movie) => {
+      if ( movie.id.toString() === id1.toString())
+        modal.innerHTML = `
+          <div class="content">
+            <img class="original" src="${movie.image.original}" alt="">
+            <div class="text">
+              <h1 class="text-title">${movie.name}</h1>
+              <p class="language">${movie.summary}</p>
+            </div>
+          </div>
+          <div class="comments-section">
+            <p>Comments<span class="commment-counter"></span></p>
+            <span class="close">&times;</span>
+
+          </div>
+        `
+    })
+   })
+
+};
 
   fetchShows();
   fetchInvolvementAPI();
