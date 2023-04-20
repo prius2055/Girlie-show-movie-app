@@ -16,6 +16,10 @@
   justify-content: space-between;
 }
 
+.hidden {
+  display: none;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -34,4 +38,76 @@
 
 footer {
   border-top: 2px solid black;
+}
+
+#homepage {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  column-gap: 2%;
+}
+
+.show {
+  display: flex;
+  flex-direction: column;
+  width: 32%;
+  margin-bottom: 20px;
+  border: 1px #ccc solid;
+  background-color: pink;
+}
+
+.show img {
+  width: 100%;
+}
+
+.show-name {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.show-likes img {
+  width: 15px;
+}
+
+button {
+  width: 75%;
+  margin: 15px auto 0 auto;
+  text-align: center;
+  padding: 4px 8px;
+}
+
+.modal {
+  display: none;
+}
+
+.modal.active {
+  display: block;
+  z-index: 4;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 103vh;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  height: 80vh;
+  position: relative;
+  background-color: white;
+  margin: 60px 90px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  flex-direction: column;
+  border-radius: 15px;
+  overflow-y: scroll;
 }
