@@ -1,5 +1,5 @@
-import { modalDisplay } from './displayShows.js';
-import helper from './helper.js';
+/* eslint-disable import/no-cycle */
+import { mainDisplay, modalDisplay } from './displayShows.js';
 
 export const involvementUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/';
 
@@ -15,13 +15,25 @@ export const fetchInvolvementAPI = async () => {
   return appId;
 };
 
+// A HELPER FUNCTION
+export const helperFunction = (showObject) => {
+  mainDisplay(showObject);
+};
+
 // GET LIKES FROM API AND PASS TO DISPLAY
 export const getLikes = async (shows) => {
   const response = await fetch(
     `${involvementUrl}apps/MSFkPneas7bTu41OHrLL/likes`,
   );
   const numOfLikes = await response.json();
-  helper({ shows, numOfLikes });
+  helperFunction({ shows, numOfLikes });
+};
+
+// GET SHOWS FROM API AND PASS TO DISPLAY
+export const fetchShows = async () => {
+  const response = await fetch('https://api.tvmaze.com/search/shows?q=girls');
+  const shows = await response.json();
+  getLikes(shows);
 };
 
 // POSTING LIKES TO API
