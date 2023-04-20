@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import { getLikes, postLikes, fetchSingleShow } from './fetch.js';
 
 import likeButton from '../img/heart.png';
