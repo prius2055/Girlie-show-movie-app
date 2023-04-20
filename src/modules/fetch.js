@@ -1,4 +1,5 @@
-import { mainDisplay, modalDisplay } from './displayShows.js';
+import { modalDisplay } from './displayShows.js';
+import helper from './helper.js';
 
 export const involvementUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/';
 
@@ -20,14 +21,7 @@ export const getLikes = async (shows) => {
     `${involvementUrl}apps/MSFkPneas7bTu41OHrLL/likes`,
   );
   const numOfLikes = await response.json();
-  mainDisplay({ shows, numOfLikes });
-};
-
-// GET SHOWS FROM API AND PASS TO DISPLAY
-export const fetchShows = async () => {
-  const response = await fetch('https://api.tvmaze.com/search/shows?q=girls');
-  const shows = await response.json();
-  getLikes(shows);
+  helper({ shows, numOfLikes });
 };
 
 // POSTING LIKES TO API

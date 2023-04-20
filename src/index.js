@@ -1,4 +1,4 @@
-import { fetchShows } from './modules/fetch.js';
+import fetchShows from './modules/getShows.js';
 
 import './style.css';
 
