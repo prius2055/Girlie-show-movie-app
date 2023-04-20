@@ -1,4 +1,3 @@
-
 import { mainDisplay, modalDisplay } from './displayShows.js';
 
 export const involvementUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/';
