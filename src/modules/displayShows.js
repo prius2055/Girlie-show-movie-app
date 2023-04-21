@@ -6,6 +6,8 @@ import {
   getComments,
 } from './fetch.js';
 
+import { commentCounter, memeCounter } from './counters.js';
+
 import likeButton from '../img/heart.png';
 
 const modal = document.querySelector('.modal');
@@ -16,16 +18,20 @@ export const mainDisplay = (showObject) => {
   const { shows } = showObject;
   const { numOfLikes } = showObject;
 
+  memeCounter(shows);
+
   const homepage = document.getElementById('homepage');
   homepage.innerHTML = '';
-  for (let i = 0; i < 6; i += 1) {
+  for (let i = 0; i < shows.length; i += 1) {
     homepage.innerHTML += `<div class='show'>
-        <img src='${shows[i].show.image.original}' alt='${shows[i].show.name}' width='250px' height='200px' />
+        <img src='${shows[i].show.image.original}' alt='${
+  shows[i].show.name
+}' width='250px' height='200px' />
         <div class='show-name'>
           <p>${shows[i].show.name}</p>
           <div class='show-likes'>
             <img src='${likeButton}' alt='like button' class='like-button'/>
-            <p> ${numOfLikes[i].likes} likes</p>
+            <p> ${numOfLikes[i] ? numOfLikes[i].likes : 0} likes</p>
           </div>
         </div>
         <button class='comment-button'>Comments</button>
@@ -37,9 +43,10 @@ export const mainDisplay = (showObject) => {
   const commentButtons = document.querySelectorAll('.comment-button');
   commentButtons.forEach((commentButton, i) => commentButton.addEventListener('click', (e) => {
     e.preventDefault();
+    const { thetvdb } = shows[i].show.externals;
     const { imdb } = shows[i].show.externals;
     const id = i + 1;
-    fetchSingleShow(imdb, id);
+    fetchSingleShow(thetvdb || imdb, id);
     modal.classList.add('active');
   }));
 
@@ -58,7 +65,6 @@ export const modalDisplay = (modalShowObject, i) => {
   const { show } = modalShowObject;
   const { comments } = modalShowObject;
 
-  // console.log(modalShowObject)
   modalContent.innerHTML = `
           <div class="content">
             <img class="original" src=${show.image.original} alt=${
@@ -71,8 +77,7 @@ export const modalDisplay = (modalShowObject, i) => {
             </div>
           </div>
           <div class="comments-section">
-            <h3>Comments<span class="commment-counter">(&times;)</span></h3>
-   
+          ${commentCounter(comments)}
           ${
   comments.length > 0
     ? comments.map(
@@ -101,3 +106,5 @@ export const modalDisplay = (modalShowObject, i) => {
     }, 1000);
   });
 };
+
+// ${numOfLikes[i].likes}
