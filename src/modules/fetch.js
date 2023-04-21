@@ -14,7 +14,7 @@ export const fetchInvolvementAPI = async () => {
   return appId;
 };
 
-// A HELPER FUNCTION
+// A HELPER FUNCTION FOR MAIN DISPLAY
 export const helperFunction = (showObject) => {
   mainDisplay(showObject);
 };
@@ -53,12 +53,50 @@ export const postLikes = async (id) => {
   return result;
 };
 
+// POSTING COMMENTS TO API FROM MODAL DISPLAY
+export const postComments = async (id, username, comment) => {
+  const response = await fetch(
+    `${involvementUrl}apps/MSFkPneas7bTu41OHrLL/comments`,
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        item_id: id,
+        username,
+        comment,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    },
+  );
+  const result = await response.json();
+  return result;
+};
+
+// A HELPER FUNCTION FOR MODAL DISPLAY
+export const modalHelperFunction = (modalShowObject, id) => {
+  modalDisplay(modalShowObject, id);
+};
+
+// GETTING COMMENTS FROM API TO MODAL DISPLAY
+export const getComments = async (id, show) => {
+  const response = await fetch(
+    `${involvementUrl}apps/MSFkPneas7bTu41OHrLL/comments?item_id=${id}`,
+  );
+  const comments = response.ok ? await response.json() : '';
+  // console.log(response.ok);
+  // console.log(comments);
+
+  // console.log({ show, comments }, id);
+  modalHelperFunction({ show, comments }, id);
+};
+
 // FETCHING SINGLE SHOW & CALLING MODAL DISPLAY
-export const fetchSingleShow = async (para) => {
+export const fetchSingleShow = async (para, index) => {
   const response = await fetch(
     `https://api.tvmaze.com/lookup/shows?imdb=${para}`,
   );
   const show = await response.json();
-
-  modalDisplay(show);
+  // console.log(index,show);
+  getComments(index, show);
 };

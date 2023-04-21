@@ -1,9 +1,15 @@
-import { getLikes, postLikes, fetchSingleShow } from './fetch.js';
+import {
+  getLikes,
+  postLikes,
+  fetchSingleShow,
+  postComments,
+  getComments,
+} from './fetch.js';
 
 import likeButton from '../img/heart.png';
 
-const showModal = document.querySelector('.modal');
-const modal = document.querySelector('.content');
+const modal = document.querySelector('.modal');
+const modalContent = document.querySelector('.modal-content');
 
 // MAIN SCREEN DISPLAY
 export const mainDisplay = (showObject) => {
@@ -32,23 +38,32 @@ export const mainDisplay = (showObject) => {
   commentButtons.forEach((commentButton, i) => commentButton.addEventListener('click', (e) => {
     e.preventDefault();
     const { imdb } = shows[i].show.externals;
-    fetchSingleShow(imdb);
-    showModal.classList.add('active');
+    const id = i + 1;
+    fetchSingleShow(imdb, id);
+    modal.classList.add('active');
   }));
 
   // ADD EVENTS TO LIKE BUTTON
   const likeButtons = document.querySelectorAll('.like-button');
   likeButtons.forEach((likeButton, i) => likeButton.addEventListener('click', () => {
     postLikes(i);
-    getLikes(shows);
+    setTimeout(() => {
+      getLikes(shows);
+    }, 1000);
   }));
 };
 
 // MODAL SCREEN DISPLAY FUNCTION
-export const modalDisplay = (show) => {
-  modal.innerHTML = `
-          <div class="content-display">
-            <img class="original" src=${show.image.original} alt=${show.image.original}>
+export const modalDisplay = (modalShowObject, i) => {
+  const { show } = modalShowObject;
+  const { comments } = modalShowObject;
+
+  // console.log(modalShowObject)
+  modalContent.innerHTML = `
+          <div class="content">
+            <img class="original" src=${show.image.original} alt=${
+  show.image.original
+}>
             <div class="text">
               <h1 class="text-title">${show.name}</h1>
               <p class="language">${show.language}</p>
@@ -57,17 +72,32 @@ export const modalDisplay = (show) => {
           </div>
           <div class="comments-section">
             <h3>Comments<span class="commment-counter">(&times;)</span></h3>
-            <p>03/11/2021 Alex: I'd love to buy it</p>
-            <p>03/11/2021 Alex: I'd love to buy it</p>
+   
+          ${
+  comments.length > 0
+    ? comments.map(
+      (comment) => `<p>${comment.creation_date} ${comment.username}: ${comment.comment}</p>`,
+    )
+    : '<p>No Available comments</p>'
+}
             <div class='comment-input'>
               <h3>Add a comment</h3>
-              <input type="text" placeholder="Your name"/>
-              <textarea>Your name</textarea/>
+              <input type="text" placeholder="Your name" class="comment-name"/>
+              <textarea class="comment-text" placeholder="Drop a comment here"></textarea/>
               <button class="modal-comment-button">Comment</button>
             </div>
           </div>
         `;
-
+  const modalCommentName = document.querySelector('.comment-name');
+  const modalCommentText = document.querySelector('.comment-text');
   const modalCommentBtn = document.querySelector('.modal-comment-button');
-  modalCommentBtn.addEventListener('click', () => {});
+  modalCommentBtn.addEventListener('click', () => {
+    const username = modalCommentName.value;
+    const comment = modalCommentText.value;
+    const id = i;
+    postComments(id, username, comment);
+    setTimeout(() => {
+      getComments(id, show);
+    }, 1000);
+  });
 };
