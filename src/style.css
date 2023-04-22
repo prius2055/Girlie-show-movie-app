@@ -89,14 +89,8 @@ footer {
 
 button {
   width: 75%;
-  margin: 15px auto 0 auto;
+  margin: 10px auto;
   text-align: center;
-  padding: 4px 8px;
-  font-weight: 900;
-}
-
-.modal {
-  display: none;
 }
 
 .modal.active {
@@ -132,9 +126,6 @@ button {
   height: 400px;
   border: 2px #ccc solid;
   border-radius: 20px;
-
-  /* margin: 0 auto;
-  align-self: center; */
 }
 
 .close-button {

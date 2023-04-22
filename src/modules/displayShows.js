@@ -34,7 +34,6 @@ export const mainDisplay = (showObject) => {
           </div>
         </div>
         <button class='comment-button'>Comments</button>
-        <button>Reservations</button>
         </div>`;
   }
 
