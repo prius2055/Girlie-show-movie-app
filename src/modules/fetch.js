@@ -95,6 +95,5 @@ export const fetchSingleShow = async (para, index) => {
       : `https://api.tvmaze.com/lookup/shows?imdb=${para}`,
   );
   const show = await response.json();
-  // console.log(index,show);
   getComments(index, show);
 };
