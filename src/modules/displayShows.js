@@ -9,6 +9,7 @@ import {
 import { commentCounter, showCounter } from './counters.js';
 
 import likeButton from '../img/heart.png';
+import closeButton from '../img/close.png';
 
 const modal = document.querySelector('.modal');
 const modalContent = document.querySelector('.modal-content');
@@ -68,17 +69,21 @@ export const modalDisplay = (modalShowObject, i) => {
 
   modalContent.innerHTML = `
           <div class="content">
-            <img class="original" src=${show.image.original} alt=${
+           <img class="close-button" src=${closeButton} alt="Close button"/>
+            <img class="original-img" src=${show.image.original} alt=${
   show.image.original
 }>
             <div class="text">
               <h1 class="text-title">${show.name}</h1>
-              <p class="language">${show.language}</p>
-              <p class="language">${show.genres[0]}</p>
+              <div class='language'>
+              <p>Language:${show.language}</p>
+              <p>Genre:${show.genres[0]}</p>
+              </div>
+              
             </div>
           </div>
           <div class="comments-section">
-          ${commentCounter(comments)}
+          <h3>${commentCounter(comments)}</h3>
           ${
   comments.length > 0
     ? comments.map(
@@ -106,4 +111,10 @@ export const modalDisplay = (modalShowObject, i) => {
       getComments(id, show);
     }, 1000);
   });
+
+  // CLOSE MODAL USING THE CLOSE (X) SIGN
+  const modalCloseBtn = document.querySelectorAll('.close-button');
+  modalCloseBtn.forEach((closeBtn) => closeBtn.addEventListener('click', () => {
+    modal.classList.remove('active');
+  }));
 };
