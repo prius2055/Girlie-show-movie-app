@@ -86,7 +86,7 @@ This is a site that displays list of shows from an API. Users can also like thei
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- Click [Live Demo](https://prius2055.github.io/JavaScript-capstone-project/dist/) to see the project
+- The live preview will be up soon.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
