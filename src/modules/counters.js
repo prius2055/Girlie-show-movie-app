@@ -1,6 +1,9 @@
-export const memeCounter = (shows) => {
+export const showCounter = (showCards) => {
   const showsNavigation = document.querySelector('.shows-navigation');
-  showsNavigation.innerText = `Shows(${shows.length ? shows.length : 0})`;
+  showsNavigation.innerText = `Shows(${
+    showCards.length ? showCards.length : 0
+  })`;
+  return showsNavigation;
 };
 
 export const commentCounter = (comments) => {

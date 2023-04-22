@@ -6,7 +6,7 @@ import {
   getComments,
 } from './fetch.js';
 
-import { commentCounter, memeCounter } from './counters.js';
+import { commentCounter, showCounter } from './counters.js';
 
 import likeButton from '../img/heart.png';
 
@@ -17,8 +17,6 @@ const modalContent = document.querySelector('.modal-content');
 export const mainDisplay = (showObject) => {
   const { shows } = showObject;
   const { numOfLikes } = showObject;
-
-  memeCounter(shows);
 
   const homepage = document.getElementById('homepage');
   homepage.innerHTML = '';
@@ -38,6 +36,9 @@ export const mainDisplay = (showObject) => {
         <button>Reservations</button>
         </div>`;
   }
+
+  const showCards = document.querySelectorAll('.show');
+  showCounter(showCards);
 
   // ADD EVENTS TO COMMENTS BUTTON
   const commentButtons = document.querySelectorAll('.comment-button');
@@ -106,5 +107,3 @@ export const modalDisplay = (modalShowObject, i) => {
     }, 1000);
   });
 };
-
-// ${numOfLikes[i].likes}
